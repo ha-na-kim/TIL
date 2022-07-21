@@ -1,0 +1,55 @@
+# Weather Observation Station 1
+SELECT CITY, STATE
+FROM STATION;
+
+# Revising the Select Query 1
+SELECT *
+FROM CITY
+WHERE population >= 100000 AND countrycode = 'USA'
+
+# Select By ID
+SELECT *
+FROM city
+WHERE id = 1661
+
+# Weather Observation Station 6
+SELECT DISTINCT city
+FROM station
+WHERE city LIKE 'a%'
+OR city LIKE 'e%'
+OR city LIKE 'i%'
+OR city LIKE 'o%'
+OR city LIKE 'u%'
+
+# Weather Observation Station 12
+SELECT DISTINCT city
+FROM station
+WHERE city NOT LIKE 'a%' AND city NOT LIKE '%a'
+AND city NOT LIKE 'e%' AND city NOT LIKE '%e'
+AND city NOT LIKE 'i%' AND city NOT LIKE '%i'
+AND city NOT LIKE 'o%' AND city NOT LIKE '%o'
+AND city NOT LIKE 'u%' AND city NOT LIKE '%u'
+
+# Emplotee Names
+SELECT name
+FROM employee
+ORDER BY name
+
+# Employee Salaries
+SELECT name
+FROM employee
+WHERE salary > 2000 AND months < 10
+ORDER BY employee_id
+
+# Higher Than 75 Marks
+SELECT name
+FROM students
+WHERE marks > 75
+ORDER BY right(name, 3), id
+
+# Weather Observation Station 15
+SELECT ROUND(long_w, 4)
+FROM station
+WHERE lat_n < 137.2345
+ORDER BY lat_n DESC
+LIMIT 1
