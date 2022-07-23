@@ -26,6 +26,8 @@ SELECT DISTINCT city
 FROM station
 WHERE city REGEXP '^[aeiou]'
 AND city REGEXP '[aeiou]$'
+## 정규표현식에서 ^는 해당 문자로 시작하는 것 찾기
+## $는 해당 문자로 끝나는 것 찾기
 
 # Weather Observation Station 9
 SELECT DISTINCT city
