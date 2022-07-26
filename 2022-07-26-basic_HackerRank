@@ -1,0 +1,17 @@
+# Revising the Select Query 2
+SELECT name
+FROM city
+WHERE countrycode = 'USA'
+AND population >120000
+
+# Weather Observation Station 5
+SELECT city, LENGTH(city)
+FROM station
+ORDER BY LENGTH(city), city
+LIMIT 1;
+
+SELECT city, LENGTH(city)
+FROM station
+ORDER BY LENGTH(city) DESC, city
+LIMIT 1;
+## LENGTH 함수는 데이터의 길이를 확인할 때 사용, LEN()으로 시도했더니 오류
