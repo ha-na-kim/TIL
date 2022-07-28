@@ -1,0 +1,15 @@
+# Binary Tree Nodes
+SELECT N,
+    CASE
+        WHEN P IS NULL THEN 'Root'
+        WHEN N IN (SELECT DISTINCT P FROM BST) THEN 'Inner'
+        ELSE 'Leaf'
+    END
+FROM BST
+ORDER BY N
+
+## 이진트리에서 각각이 어떤 노드에 해당하는지 출력하라는 문제
+## N이 자식노드, P가 부모노드
+## CASE문을 이용해 해결했는데 P에 NULL값이 있으면 Root
+## 부모노드이면서 자식노드인 것을 Inner(따라서 N과 P에 중복으로 있는 숫자를 찾기 위해 서브쿼리 작성)
+## 최하위를 Leaf로 하여 작성
