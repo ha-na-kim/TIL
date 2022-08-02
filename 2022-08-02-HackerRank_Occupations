@@ -1,0 +1,18 @@
+# 정답 코드
+SELECT
+    MAX(CASE WHEN OCCUPATION = 'Doctor' THEN NAME END) AS 'Doctor',
+    MAX(CASE WHEN OCCUPATION = 'Professor' THEN NAME END) AS 'Professor',
+    MAX(CASE WHEN OCCUPATION = 'Singer' THEN NAME END) AS 'Singer',
+    MAX(CASE WHEN OCCUPATION = 'Actor' THEN NAME END) AS 'Actor'
+FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY OCCUPATION ORDER BY NAME) RN
+      FROM OCCUPATIONS) TEMP
+GROUP BY RN
+
+# 오답 코드
+SELECT
+    CASE WHEN Occupation = 'Doctor' THEN Name ELSE NULL END AS Doctor,
+    CASE WHEN Occupation = 'Professor' THEN Name ELSE NULL END AS Professor,
+    CASE WHEN Occupation = 'Singer' THEN Name ELSE NULL END AS Singer,
+    CASE WHEN Occupation = 'Actor' THEN Name ELSE NULL END AS Actor
+FROM OCCUPATIONS
+ORDER BY Doctor, Professor, Singer, Actor
