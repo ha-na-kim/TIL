@@ -1,0 +1,19 @@
+# 오답 코드
+SELECT h.hacker_id, h.name, SUM(s.score)
+FROM Hackers h
+    INNER JOIN Submissions s ON h.hacker_id = s.hacker_id
+GROUP BY s.hacker_id, h.name
+HAVING CASE
+            WHEN COUNT(s.challenge_id) >= 2 THEN MAX(score)
+            WHEN COUNT(S.challenge_id) = 1 THEN score
+        END
+ORDER BY SUM(s.score) DESC, h.hacker_id
+
+# 오답 코드2
+SELECT h.hacker_id, h.name, SUM(s.score)
+FROM Hackers h
+    LEFT JOIN Submissions s ON h.hacker_id = s.hacker_id
+GROUP BY h.hacker_id, h.name
+HAVING s.score > 0
+AND s.challenge_id = MAX(s.score)
+ORDER BY SUM(s.score) DESC, h.hacker_id
