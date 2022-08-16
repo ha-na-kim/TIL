@@ -17,3 +17,30 @@ GROUP BY h.hacker_id, h.name
 HAVING s.score > 0
 AND s.challenge_id = MAX(s.score)
 ORDER BY SUM(s.score) DESC, h.hacker_id
+
+# 오답 코드3
+SELECT s.hacker_id, h.name, SUM(s.score_sum) AS score
+FROM (
+    SELECT hacker_id
+        , CASE WHEN COUNT(challenge_id) >= 2 THEN MAX(score) ELSE score END AS score_sum
+    FROM Submissions
+    WHERE score > 0
+    GROUP BY hacker_id
+) AS s
+    LEFT JOIN Hackers h ON s.hacker_id = h.hacker_id
+GROUP BY s.hacker_id, h.name
+ORDER BY score DESC, s.hacker_id
+
+# 정답 코드
+SELECT h.hacker_id, h.name, SUM(score)
+FROM (
+    SELECT hacker_id
+        , challenge_id
+        , MAX(score) AS score
+    FROM Submissions
+    GROUP BY hacker_id, challenge_id
+) AS s
+    LEFT JOIN Hackers h ON s.hacker_id = h.hacker_id
+WHERE s.score > 0
+GROUP BY h.hacker_id, h.name
+ORDER BY SUM(score) DESC, h.hacker_id
