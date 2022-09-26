@@ -1,0 +1,30 @@
+# The PADS
+SELECT CONCAT (name, '(' , LEFT(occupation,1), ')')
+FROM occupations
+ORDER BY name
+
+SELECT CONCAT('There are a total of ', COUNT(occupation), ' ', LOWER(occupation), 's.')
+FROM occupations
+GROUP BY occupation
+ORDER BY COUNT(occupation), occupation
+## CONCAT 함수는 문자열을 합치는데 사용
+## LOWER 함수는 대문자를 소문자로 바꿔주는 역할
+## MySQL로 돌렸을 때 runtime error가 발생하여 MS SQL Server로 돌리니 실행되었다.
+## MySQL에서 다시 실행시킬 수 있는 방법 찾아보기
+
+# The Blunder
+SELECT CEIL(AVG(salary)-AVG(replace(salary, 0, '')))
+FROM employees
+## replace 함수를 사용하여 0을 없애기
+## CEIL 함수를 사용하여 정수로 반올림
+
+# Weather Observation Station 2
+SELECT ROUND(SUM(lat_n), 2) AS lat
+    , ROUND(SUM(long_w), 2) AS lon
+FROM station
+
+# Weather Observation Station 13
+SELECT TRUNCATE(SUM(lat_n), 4)
+FROM station
+WHERE lat_n BETWEEN 38.7880 AND 137.2345
+## TRUNCATE 함수는 소수점 4째 자리까지 남기고 제거하라는 뜻

@@ -1,0 +1,55 @@
+# 정답 코드
+SELECT h.hacker_id, h.name
+FROM Hackers h
+    INNER JOIN Submissions s ON h.hacker_id = s.hacker_id
+    INNER JOIN Challenges c ON s.challenge_id = c.challenge_id
+    INNER JOIN Difficulty d ON c.difficulty_level = d.difficulty_level
+WHERE d.score = s.score
+AND d.difficulty_level = c.difficulty_level
+GROUP BY h.hacker_id, h.name
+HAVING COUNT(h.hacker_id) >= 2
+ORDER BY COUNT(h.hacker_id) DESC, h.hacker_id
+
+# 첫번째 오답 코드
+SELECT h.hacker_id, h.name
+FROM Hackers h
+    INNER JOIN Challenges c ON h.hacker_id = c.hacker_id
+    INNER JOIN Difficulty d ON c.difficulty_level = d.difficulty_level
+    INNER JOIN Submissions s ON h.hacker_id = s.hacker_id
+GROUP BY h.hacker_id
+Having Count(h.hacker) >= 2
+AND MAX(s.score)
+ORDER BY COUNT(h.hacker_id) DESC, h.hacker_id
+
+# 두번째 오답 코드
+
+## 문제 난이도와 실제 제출된 테이블의 난이도가 같아야 하고
+## 문제 난이도의 만점 점수와 실제 제출했을 때 만점 점수가 동일해야 한다는 코드를 추가
+
+SELECT h.hacker_id, h.name
+FROM Hackers h
+    INNER JOIN Challenges c ON h.hacker_id = c.hacker_id
+    INNER JOIN Difficulty d ON c.difficulty_level = d.difficulty_level
+    INNER JOIN Submissions s ON h.hacker_id = s.hacker_id
+WHERE d.score = s.score
+AND d.difficulty_level = c.difficulty_level
+GROUP BY h.hacker_id
+Having Count(h.hacker) >= 2
+AND MAX(s.score)
+ORDER BY COUNT(h.hacker_id) DESC, h.hacker_id
+
+# 최종 코드
+
+## WHERE 절에서 문제의 만점 점수와 실제 제출 시 만점 점수가 동일하다고 가정했기 때문에 Having에 있는 MAX(s.score) 삭제
+## 실제 결과는 h.hacker_id, h.name가 한줄로 입력되어야 하기 때문에 GROUP BY에 h.name 추가
+
+SELECT h.hacker_id, h.name
+FROM Hackers h
+    INNER JOIN Submissions s ON h.hacker_id = s.hacker_id
+    INNER JOIN Challenges c ON s.challenge_id = c.challenge_id
+    INNER JOIN Difficulty d ON c.difficulty_level = d.difficulty_level
+WHERE d.score = s.score
+AND d.difficulty_level = c.difficulty_level
+GROUP BY h.hacker_id, h.name
+HAVING COUNT(h.hacker_id) >= 2
+ORDER BY COUNT(h.hacker_id) DESC, h.hacker_id
