@@ -1,0 +1,29 @@
+# Weather Observation Station 14
+SELECT TRUNCATE(MAX(lat_n), 4)
+FROM station
+WHERE lat_n < 137.2345
+
+# Weather Observation Station 16
+SELECT ROUND(MIN(lat_n), 4)
+FROM station
+WHERE lat_n > 38.7780
+
+# Weather Observation Station 17
+SELECT ROUND(long_w,4)
+FROM station
+WHERE lat_n > 38.7780
+ORDER BY lat_n
+LIMIT 1
+
+# Weather Observation Station 18
+SELECT ROUND(ABS(MIN(lat_n)-MAX(lat_n)) + ABS(MIN(long_w)-MAX(long_w)), 4)
+FROM station
+## 맨하튼 거리 계산법 : |x1-x2| + |y1-y2|
+
+# Weather Observation Station 19
+SELECT ROUND(SQRT(POW(MIN(lat_n)-MAX(lat_n), 2) + POW(MIN(long_w)-MAX(long_w), 2)), 4)
+FROM station
+## 유클리디안 거리 계산법 : 루트((x1-x2)^2 + (y1-y2)^2)
+## POW 함수는 제곱을 표현
+## SQRT 함수는 제곱근
+

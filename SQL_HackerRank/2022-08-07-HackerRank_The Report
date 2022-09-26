@@ -1,0 +1,12 @@
+# 정답 코드
+
+SELECT IF(g.Grade <8, NULL, s.Name)
+    , g.Grade
+    , s.Marks
+FROM Students s
+    INNER JOIN Grades g ON s.Marks BETWEEN g.Min_Mark AND g.Max_Mark
+ORDER BY g.Grade DESC, s.Name
+
+## Students 테이블과 Grades 테이블에 조인키로 이용될 만한 칼럼이 없어 전혀 방향성을 잡지 못했었다
+## 결국 문제 구글링을 통해 join을 할 때 ON 뒤에 무조건 = 이 올 필요가 없다는 것을 새롭게 배웠다.
+## JOIN ~ ON 뒤에 BETWEEN이 올 수도 있다는 걸 알았다면 쉽게 풀었을 문제같다.

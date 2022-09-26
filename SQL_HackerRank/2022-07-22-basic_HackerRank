@@ -1,0 +1,35 @@
+# Japanese Cities’s Names
+SELECT name
+FROM city
+WHERE countrycode = 'JPN'
+
+# Weather Observation Station 3
+SELECT DISTINCT city
+FROM station
+WHERE id%2 = 0
+## SQL에서 나머지를 구할 땐 % 사용
+
+# Weather Observation Station 7
+SELECT DISTINCT city
+FROM station
+WHERE right(city, 1) IN ('a', 'e', 'i', 'o', 'u')
+
+# Weather Observation Station 8
+## first solution
+SELECT DISTINCT city
+FROM station
+WHERE left(city, 1) IN ('a', 'e', 'i', 'o', 'u')
+AND right(city, 1) IN ('a', 'e', 'i', 'o', 'u')
+
+## second solution
+SELECT DISTINCT city
+FROM station
+WHERE city REGEXP '^[aeiou]'
+AND city REGEXP '[aeiou]$'
+## 정규표현식에서 ^는 해당 문자로 시작하는 것 찾기
+## $는 해당 문자로 끝나는 것 찾기
+
+# Weather Observation Station 9
+SELECT DISTINCT city
+FROM station
+WHERE city NOT REGEXP '^[aeiou]'
