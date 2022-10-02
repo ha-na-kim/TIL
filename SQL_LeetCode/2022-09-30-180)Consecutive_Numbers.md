@@ -43,3 +43,24 @@
     WHERE l.num = l_2.num
     AND l_2.num = l_3.num
     AND l.num = l_3.num
+
+<br>
+
+#### **정답 문제풀이 2**
+
+<br>
+
+- Window 함수를 이용한 정답 문제풀이
+- Window 함수에서 LEAD 대신 LAG 사용할 수도 있음
+
+<br>
+
+    SELECT DISTINCT l.num AS ConsecutiveNums
+    FROM (
+        SELECT num
+            , LEAD(num, 1) OVER (ORDER BY id) AS lead_num
+            , LEAD(num, 2) OVER (ORDER BY id) AS lead_num_2
+        FROM Log
+    ) l
+    WHERE l.num = l.lead_num
+    AND l.num = l.lead_num_2
