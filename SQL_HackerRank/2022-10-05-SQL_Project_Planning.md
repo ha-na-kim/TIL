@@ -75,3 +75,17 @@
     WHERE Start_Date < End_Date
     GROUP BY Start_Date
     ORDER BY DATEDIFF(MIN(End_Date), Start_Date), Start_Date
+
+<br>
+
+#### **Window 함수 이용한 문제풀이 추가**
+
+<br>
+
+    SELECT MIN(Start_Date), MAX(End_Date)
+    FROM (
+        SELECT Start_Date, End_Date, Start_Date - ROW_NUMBER() OVER(ORDER BY Start_Date) as rnk
+        FROM Projects
+        ) p
+    GROUP BY rnk
+    ORDER BY DATEDIFF(MAX(End_Date),MIN(Start_Date)), MIN(Start_Date)
