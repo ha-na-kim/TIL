@@ -16,8 +16,8 @@
 
 <br>
 
-- 1. Transactions 테이블에서 account로 그룹핑, 잔액이 10000 이상인 계정과 잔액 출력
-- 2. 1번 테이블을 FROM절의 서브쿼리에 넣고 Users 테이블과 account 기준으로 INNER JOIN하여 이름과 잔액 출력
+1. Transactions 테이블에서 account로 그룹핑, 잔액이 10000 이상인 계정과 잔액 출력
+2. 1번 테이블을 FROM절의 서브쿼리에 넣고 Users 테이블과 account 기준으로 INNER JOIN하여 이름과 잔액 출력
 
 <br>
 
